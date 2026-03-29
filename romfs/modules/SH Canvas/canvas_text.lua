@@ -2,28 +2,60 @@ local CanvasText = {}
 CanvasText.__index = CanvasText
 local FontsManager = require("fonts_manager")
 
-function CanvasText:new(fontName, content)
+function CanvasText:new(options)
     local this = setmetatable({}, CanvasText)
-    this.data = {
-        fontName = fontName,
-        size = 3,
-        color = Color.new(255, 255, 255),
-        posx = 0,
-        posy = 0,
-        content = content
-    }
+
+    this.fontName = options.fontName or "Arial"
+    this.content = options.content or ""
+    this.size = options.size or 3
+    this.color = options.color or Color.new(255, 255, 255)
+    this.posx = options.posx or 0
+    this.posy = options.posy or 0
     return this
 end 
 
 function CanvasText:setTextSize(pixelSize)
-    self.data.size = pixelSize
+    self.size = pixelSize
+end
+
+function CanvasText:getTextSize()
+    return self.size
+end
+
+function CanvasText:setTextContent(content)
+    self.content = content
+end
+
+function CanvasText:getTextContent()
+    return self.content
+end
+
+function CanvasText:setColor(color)
+    self.color = color
+end
+
+function CanvasText:getColor()
+    return self.color
+end
+
+function CanvasText:setFont(fontName)
+    self.fontName = fontName
+end
+
+function CanvasText:getFontName()
+    return self.fontName
 end
 
 function CanvasText:setTextPosition(posx, posy)
-    self.data.posx = posx
-    self.data.posy = posy
+    self.posx = posx
+    self.posy = posy
 end
-function CanvasText:_draw()
-    Font.print(FontsManager.getFont(self.data.fontName), self.data.posx, self.data.posy, self.data.content, self.data.color, TOP_SCREEN)
+
+function CanvasText:getTextPosition()
+    return self.posx, self.posy
+end
+
+function CanvasText:_draw(space)
+    Font.print(FontsManager.getFont(self.fontName), self.posx, self.posy, self.content, self.color, space)
 end
 return CanvasText
