@@ -1,44 +1,45 @@
 package.path = package.path .. ";romfs:/modules/?.lua"
 package.path = package.path .. ";romfs:/modules/SH Canvas/?.lua"
+package.path = package.path .. ";romfs:/modules/LPP Input System/?.lua"
 local systemInfo = require("system_info")
 local infoParser = require("info_parser")
 local SHCanvas = require("sh_canvas")
 local canvasText = require("canvas_text")
+local InputSystem = require("lpp_input_system")
 SHCanvas.init()
-local text = canvasText:new({
-	content = "teste de texto"
-})
+local text = canvasText:new({})
 text:setTextPosition(5, 5)
 text:setTextSize(10)
 local canvas1 = SHCanvas:new()
+local counter = 0
 canvas1:addCanvasComponent(text)
-local canvas2 = SHCanvas:new(BOTTOM_SCREEN)
-canvas2:addCanvasComponent(text)
 while true do
 	Screen.refresh()
 	
 	Screen.waitVblankStart()
 	Screen.clear(TOP_SCREEN)
-	Screen.clear(BOTTOM_SCREEN)
-	systemInfo.refreshInfos()
+	InputSystem.readInputs()
+	--systemInfo.refreshInfos()
+
+	if InputSystem.getKeyDown(KEY_A) then
+		counter = counter + 1
+	end
+	if InputSystem.getKeyDown(KEY_B) then
+		counter = counter + 2
+	end
+	if InputSystem.getKeyDown(KEY_X) then
+		counter = counter - 1
+	end
+	text:setTextContent("Mem: " .. tostring(collectgarbage("count")))
+	local cx, cy = InputSystem.getCirclePad()
+	local tx, ty = text:getTextPosition()
+	tx = math.floor(tx + cx * 0.1)
+	ty = math.floor(ty + cy * -0.1)
+	text:setTextPosition(tx, ty)
 	canvas1:draw()
-	canvas2:draw()
-	--[[
-	Screen.debugPrint(5,5,tostring(infoParser.parseLanguage(systemInfo.infos.language)),Color.new(255,255,255),TOP_SCREEN)
-	Screen.debugPrint(5,20,tostring(systemInfo.infos.username),Color.new(255,255,255),TOP_SCREEN)
-	Screen.debugPrint(5,35,tostring(infoParser.parseRegion(systemInfo.infos.region)),Color.new(255,255,255),TOP_SCREEN)
-	Screen.debugPrint(5,50,tostring(infoParser.parseModel(systemInfo.infos.model)),Color.new(255,255,255),TOP_SCREEN)
-	Screen.debugPrint(5,65,tostring(systemInfo.infos.cpuSpeed),Color.new(255,255,255),TOP_SCREEN)
-	Screen.debugPrint(5,80,tostring(systemInfo.infos.battery.life),Color.new(255,255,255),TOP_SCREEN)
-	Screen.debugPrint(5,95,tostring(systemInfo.infos.battery.isCharging),Color.new(255,255,255),TOP_SCREEN)
-	Screen.debugPrint(distance,5,systemInfo.infos.birthday.day .. "/" .. systemInfo.infos.birthday.month,Color.new(255,255,255),TOP_SCREEN)
-	Screen.debugPrint(distance,20,systemInfo.infos.firmware.major .. "." .. systemInfo.infos.firmware.minor .. "." .. systemInfo.infos.firmware.revision,Color.new(255,255,255),TOP_SCREEN)
-	Screen.debugPrint(distance,35,systemInfo.infos.kernel.major .. "." .. systemInfo.infos.kernel.minor .. "." .. systemInfo.infos.kernel.revision,Color.new(255,255,255),TOP_SCREEN)
-	Screen.debugPrint(distance,50,string.format("%02d:%02d:%02d", systemInfo.infos.time.hours, systemInfo.infos.time.minutes, systemInfo.infos.time.seconds),Color.new(255,255,255),TOP_SCREEN)
-	Screen.debugPrint(distance,65,infoParser.parseWeek(systemInfo.infos.date.week) .. ", " .. string.format("%02d/%02d/%04d", systemInfo.infos.date.day, systemInfo.infos.date.month, systemInfo.infos.date.year),Color.new(255,255,255),TOP_SCREEN)
-	--]]
+
 	Screen.flip()
-	if Controls.check(Controls.read(), KEY_HOME) then
+	if InputSystem.getKeyDown(KEY_HOME) then
 		System.showHomeMenu()
 	end
 	if System.checkStatus() == APP_EXITING then

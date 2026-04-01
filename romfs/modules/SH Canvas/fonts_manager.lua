@@ -1,15 +1,25 @@
 local FontsManager = {}
 local loadedFonts = {}
+local fontsPath = "romfs:/fonts/"
+local availableFonts = {"dogicapixelbold", "Arial"}
+
+function FontsManager.setFontsPath(path)
+    fontsPath = path
+end
 
 function FontsManager.loadFont(fontName)
-    local font = Font.load("romfs:/fonts/".. fontName .. ".ttf")
+    local font = Font.load(fontsPath .. fontName .. ".ttf")
     loadedFonts[fontName] = font
 end
+
 function FontsManager.loadAllFonts()
-    FontsManager.loadFont("dogicapixelbold")
-    FontsManager.loadFont("Arial")
+    for i in ipairs(availableFonts) do
+       FontsManager.loadFont(availableFonts[i]) 
+    end
 end
+
 function FontsManager.getFont(fontName)
     return loadedFonts[fontName]
 end
+
 return FontsManager
