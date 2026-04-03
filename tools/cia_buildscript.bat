@@ -1,0 +1,2 @@
+3dstool -cvtf romfs "../romfs.bin" --romfs-dir "../romfs"
+makerom -f cia -o "../build/lpp-3ds.cia" -elf "../build/lpp-3ds.elf" -rsf "../build assets/cia_workaround.rsf" -icon "../build assets/icon.icn" -banner "../build assets/banner.bnr" -exefslogo -target t -romfs "../romfs.bin" -major 0 -minor 1 -micro 0

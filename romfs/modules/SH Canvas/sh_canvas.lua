@@ -8,6 +8,7 @@ function SHCanvas:new(space)
     this.components = {}
     return this
 end
+
 function SHCanvas.init()
     FontsManager.loadAllFonts()
 end

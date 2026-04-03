@@ -12,7 +12,7 @@ function CanvasText:new(options)
     this.posx = options.posx or 0
     this.posy = options.posy or 0
     return this
-end 
+end
 
 function CanvasText:setTextSize(pixelSize)
     self.size = pixelSize
@@ -58,4 +58,5 @@ end
 function CanvasText:_draw(space)
     Font.print(FontsManager.getFont(self.fontName), self.posx, self.posy, self.content, self.color, space)
 end
+
 return CanvasText

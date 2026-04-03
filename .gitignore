@@ -38,13 +38,4 @@ luac.out
 *.i*86
 *.x86_64
 *.hex
-
-SH 3DS Info.code-workspace
-*.bat
-lpp-3ds.3ds
-lpp-3ds.3dsx
-lpp-3ds.cia
-lpp-3ds.smdh
-cia_workaround.rsf
-3ds_workaround.rsf
-romfs.bin
+/build

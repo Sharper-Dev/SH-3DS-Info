@@ -13,38 +13,35 @@ text:setTextSize(10)
 local canvas1 = SHCanvas:new()
 local counter = 0
 canvas1:addCanvasComponent(text)
+
 while true do
-	Screen.refresh()
-	
-	Screen.waitVblankStart()
-	Screen.clear(TOP_SCREEN)
-	InputSystem.readInputs()
-	--systemInfo.refreshInfos()
+    Screen.refresh()
 
-	if InputSystem.getKeyDown(KEY_A) then
-		counter = counter + 1
-	end
-	if InputSystem.getKeyDown(KEY_B) then
-		counter = counter + 2
-	end
-	if InputSystem.getKeyDown(KEY_X) then
-		counter = counter - 1
-	end
-	text:setTextContent("Mem: " .. tostring(collectgarbage("count")))
-	local cx, cy = InputSystem.getCirclePad()
-	local tx, ty = text:getTextPosition()
-	tx = math.floor(tx + cx * 0.1)
-	ty = math.floor(ty + cy * -0.1)
-	text:setTextPosition(tx, ty)
-	canvas1:draw()
+    Screen.waitVblankStart()
+    Screen.clear(TOP_SCREEN)
+    InputSystem.readInputs()
+    --systemInfo.refreshInfos()
 
-	Screen.flip()
-	if InputSystem.getKeyDown(KEY_HOME) then
-		System.showHomeMenu()
-	end
-	if System.checkStatus() == APP_EXITING then
-		System.exit()
-		break
-	end
+    if InputSystem.getKeyDown(KEY_A) then
+        counter = counter + 1
+    end
+    if InputSystem.getKeyDown(KEY_B) then
+        counter = counter + 2
+    end
+    if InputSystem.getKeyDown(KEY_X) then
+        counter = counter - 1
+    end
+    local x, y = InputSystem.getCirclePad()
+    text:setTextContent("Count: " .. counter .. " Line break \\n" .. tostring(x .. ", " .. y))
+
+    canvas1:draw()
+
+    Screen.flip()
+    if InputSystem.getKeyDown(KEY_HOME) then
+        System.showHomeMenu()
+    end
+    if System.checkStatus() == APP_EXITING then
+        System.exit()
+        break
+    end
 end
-

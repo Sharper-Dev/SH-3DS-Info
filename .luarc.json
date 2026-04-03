@@ -1,0 +1,15 @@
+{
+    "diagnostics.globals": [
+        "Screen",
+        "KEY_X",
+        "TOP_SCREEN",
+        "KEY_A",
+        "KEY_B",
+        "KEY_HOME",
+        "APP_EXITING",
+        "System",
+        "Controls",
+        "Color",
+        "Font"
+    ]
+}
