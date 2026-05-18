@@ -1,2 +1,2 @@
-3dstool -cvtf romfs romfs.bin --romfs-dir romfs
-3dsxtool lpp-3ds.elf lpp-3ds.3dsx --romfs=romfs.bin --smdh=lpp-3ds.smdh
+3dstool -cvtf romfs "../romfs.bin" --romfs-dir "../romfs"
+3dsxtool "../build/lpp-3ds.elf" "../build/lpp-3ds.3dsx" --romfs="../romfs.bin" --smdh="../build/lpp-3ds.smdh"

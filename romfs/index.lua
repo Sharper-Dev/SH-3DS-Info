@@ -1,41 +1,57 @@
 package.path = package.path .. ";romfs:/modules/?.lua"
 package.path = package.path .. ";romfs:/modules/SH Canvas/?.lua"
 package.path = package.path .. ";romfs:/modules/LPP Input System/?.lua"
-local systemInfo = require("system_info")
-local infoParser = require("info_parser")
+
 local SHCanvas = require("sh_canvas")
-local canvasText = require("canvas_text")
+local SHCText = require("shc_text")
+local SHCImage = require("shc_image")
+local SHCTransform = require("shc_transform")
+
 local InputSystem = require("lpp_input_system")
-SHCanvas.init()
-local text = canvasText:new({})
-text:setTextPosition(5, 5)
-text:setTextSize(10)
+local SystemInfo = require("system_info")
+
 local canvas1 = SHCanvas:new()
-local counter = 0
-canvas1:addCanvasComponent(text)
+local canvasBottom = SHCanvas:new(BOTTOM_SCREEN)
+local userText = nil
+local birthdayText = nil
+local image = SHCImage:new("romfs:/images/TopPlaceHolder.png")
+local bottomBack = SHCImage:new("romfs:/images/bottom_background.png")
+
+local function setup()
+    Graphics.init()
+    SHCanvas.init()
+    userText = SHCText:new({
+        transform = SHCTransform:new():setPosition(5, 47, 1),
+        fontName = "dogicapixelbold",
+        size = 10,
+        content = "User: " .. SystemInfo.infos.username
+    })
+    birthdayText = SHCText:new({
+        transform = SHCTransform:new():setPosition(5, 67, 1),
+        fontName = "dogicapixelbold",
+        size = 10,
+        content = "Birthday: " .. string.format("%02d", SystemInfo.infos.birthday.day) .. "/" .. string.format("%02d", SystemInfo.infos.birthday.month)
+    })
+    canvas1:addCanvasComponent(userText)
+    canvas1:addCanvasComponent(birthdayText)
+    canvas1:addCanvasComponent(image)
+    canvasBottom:addCanvasComponent(bottomBack)
+end
+setup()
+local function update()
+    InputSystem.readInputs()
+    canvas1:draw()
+    canvasBottom:draw()
+end
 
 while true do
     Screen.refresh()
-
+    
     Screen.waitVblankStart()
     Screen.clear(TOP_SCREEN)
-    InputSystem.readInputs()
-    --systemInfo.refreshInfos()
-
-    if InputSystem.getKeyDown(KEY_A) then
-        counter = counter + 1
-    end
-    if InputSystem.getKeyDown(KEY_B) then
-        counter = counter + 2
-    end
-    if InputSystem.getKeyDown(KEY_X) then
-        counter = counter - 1
-    end
-    local x, y = InputSystem.getCirclePad()
-    text:setTextContent("Count: " .. counter .. " Line break \\n" .. tostring(x .. ", " .. y))
-
-    canvas1:draw()
-
+    Screen.clear(BOTTOM_SCREEN)
+    update()
+    
     Screen.flip()
     if InputSystem.getKeyDown(KEY_HOME) then
         System.showHomeMenu()

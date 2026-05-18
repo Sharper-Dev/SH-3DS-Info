@@ -1,7 +1,7 @@
 local FontsManager = {}
 local loadedFonts = {}
 local fontsPath = "romfs:/fonts/"
-local availableFonts = { "dogicapixelbold", "Arial" }
+local availableFonts = { "dogicapixelbold", "arial" }
 
 function FontsManager.setFontsPath(path)
     fontsPath = path

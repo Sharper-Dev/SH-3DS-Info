@@ -14,13 +14,23 @@ function SHCanvas.init()
 end
 
 function SHCanvas:draw()
+    Graphics.initBlend(self.space)
     for _, component in ipairs(self.components) do
-        component:_draw(self.space)
+        if (type(component._drawGPU) == "function") then
+            component:_drawGPU(self.space)
+        end
+    end
+    Graphics.termBlend()
+    for _, component in ipairs(self.components) do
+        if (type(component._drawCPU) == "function") then
+            component:_drawCPU(self.space)
+        end
     end
 end
 
 function SHCanvas:addCanvasComponent(component)
     table.insert(self.components, component)
+    table.sort(self.components, function(a, b) return a.transform.position.z < b.transform.position.z end)
 end
 
 return SHCanvas
