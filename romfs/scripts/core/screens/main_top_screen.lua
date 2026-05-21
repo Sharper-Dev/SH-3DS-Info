@@ -1,4 +1,4 @@
-local MainScreen = {}
+local MainTopScreen = {}
 
 local SHCanvas = require("sh_canvas")
 local SHCText = require("shc_text")
@@ -8,7 +8,6 @@ local SystemInfo = require("system_info")
 local InfoParser = require("info_parser")
 
 local canvasTop = SHCanvas:new(TOP_SCREEN)
-local canvasBottom = SHCanvas:new(BOTTOM_SCREEN)
 
 local userText = nil
 local birthdayText = nil
@@ -18,9 +17,8 @@ local languageText = nil
 local languageValueText = nil
 
 local topBackground = SHCImage:new("romfs:/images/TopPlaceHolder.png")
-local bottomBackground = SHCImage:new("romfs:/images/bottom_background.png")
 
-function MainScreen.setup()
+function MainTopScreen.setup()
     userText = SHCText:new({
         transform = SHCTransform:new():setPosition(5, 47, 1),
         fontName = "dogicapixelbold",
@@ -66,12 +64,10 @@ function MainScreen.setup()
     canvasTop:addCanvasComponent(regionText)
     canvasTop:addCanvasComponent(languageText)
     canvasTop:addCanvasComponent(languageValueText)
-    canvasBottom:addCanvasComponent(bottomBackground)
 end
 
-function MainScreen.draw()
+function MainTopScreen.draw()
     canvasTop:draw()
-    canvasBottom:draw()
 end
 
-return MainScreen
+return MainTopScreen
