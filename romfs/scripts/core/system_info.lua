@@ -1,27 +1,11 @@
-local systemInfo = {}
-systemInfo.infos = {
-    firmware = {
-        major = (select(1, System.getFirmware())),
-        minor = (select(2, System.getFirmware())),
-        revision = (select(3, System.getFirmware()))
-    },
-    kernel = {
-        major = (select(1, System.getKernel())),
-        minor = (select(2, System.getKernel())),
-        revision = (select(3, System.getKernel()))
-    },
-    region = System.getRegion(),
-    username = System.getUsername(),
-    birthday = {
-        day = (select(1, System.getBirthday())),
-        month = (select(2, System.getBirthday()))
-    },
+local SystemInfo = {}
+local InfoParser = require("info_parser")
+
+SystemInfo.infos = {
     battery = {
         isCharging = System.isBatteryCharging(),
         life = nil
     },
-    model = System.getModel(),
-    language = System.getLanguage(),
     time = {
         hours = 0,
         minutes = 0,
@@ -32,21 +16,64 @@ systemInfo.infos = {
         day = 0,
         month = 0,
         year = 0
-    },
-    cpuSpeed = System.getCpuSpeed()
+    }
 }
-function systemInfo.refreshInfos()
-    systemInfo.infos.battery.isCharging = System.isBatteryCharging()
-    systemInfo.infos.battery.life = System.getBatteryLife()
 
-    systemInfo.infos.time.hours = (select(1, System.getTime()))
-    systemInfo.infos.time.minutes = (select(2, System.getTime()))
-    systemInfo.infos.time.seconds = (select(3, System.getTime()))
-
-    systemInfo.infos.date.week = (select(1, System.getDate()))
-    systemInfo.infos.date.day = (select(2, System.getDate()))
-    systemInfo.infos.date.month = (select(3, System.getDate()))
-    systemInfo.infos.date.year = (select(4, System.getDate()))
+function SystemInfo.getUsername()
+    return System.getUsername()
 end
 
-return systemInfo
+function SystemInfo.getBirthday()
+    local day, month = System.getBirthday()
+
+    return string.format("%02d", day) .. "/" .. string.format("%02d", month)
+end
+
+function SystemInfo.getCpuSpeed()
+    return System.getCpuSpeed()
+end
+
+function SystemInfo.getFirmware()
+    local major, minor, revision = System.getFirmware()
+    local firmware = major .. "." .. minor .. "." .. revision
+
+    return firmware
+end
+
+function SystemInfo.getKernel()
+    local major, minor, revision = System.getKernel()
+    local kernel = major .. "." .. minor .. "." .. revision
+
+    return kernel
+end
+
+function SystemInfo.getRegion()
+    local parsed = InfoParser.parseRegion(System.getRegion())
+    return parsed
+end
+
+function SystemInfo.getModel()
+    local parsed = InfoParser.parseModel(System.getModel())
+    return parsed
+end
+
+function SystemInfo.getLanguage()
+    local parsed = InfoParser.parseLanguage(System.getLanguage())
+    return parsed
+end
+
+function SystemInfo.refreshInfos()
+    SystemInfo.infos.battery.isCharging = System.isBatteryCharging()
+    SystemInfo.infos.battery.life = System.getBatteryLife()
+
+    SystemInfo.infos.time.hours = (select(1, System.getTime()))
+    SystemInfo.infos.time.minutes = (select(2, System.getTime()))
+    SystemInfo.infos.time.seconds = (select(3, System.getTime()))
+
+    SystemInfo.infos.date.week = (select(1, System.getDate()))
+    SystemInfo.infos.date.day = (select(2, System.getDate()))
+    SystemInfo.infos.date.month = (select(3, System.getDate()))
+    SystemInfo.infos.date.year = (select(4, System.getDate()))
+end
+
+return SystemInfo

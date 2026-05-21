@@ -1,4 +1,4 @@
-local infoParser = {}
+local InfoParser = {}
 local MODELS = {
     [0] = "Nintendo 3DS",
     [1] = "Nintendo 3DS XL",
@@ -6,7 +6,7 @@ local MODELS = {
     [3] = "Nintendo 2DS",
     [4] = "New 3DS XL",
     [5] = "New 2DS XL"
-    }
+}
 local REGIONS = {
     [1] = "USA",
     [2] = "EUR",
@@ -34,15 +34,16 @@ local WEEKS = {
     [5] = "Friday",
     [6] = "Saturday"
 }
-function infoParser.parseModel(modelID)
+
+function InfoParser.parseModel(modelID)
     return MODELS[modelID]
 end
 
-function infoParser.parseLanguage(languageID)
+function InfoParser.parseLanguage(languageID)
     return LANGUAGES[languageID]
 end
 
-function infoParser.parseRegion(regionID)
+function InfoParser.parseRegion(regionID)
     local valueToReturn
     if regionID ~= 1 and regionID ~= 2 then
         valueToReturn = REGIONS[3]
@@ -52,7 +53,8 @@ function infoParser.parseRegion(regionID)
     return valueToReturn
 end
 
-function infoParser.parseWeek(weekID)
+function InfoParser.parseWeek(weekID)
     return WEEKS[weekID]
 end
-return infoParser
+
+return InfoParser
