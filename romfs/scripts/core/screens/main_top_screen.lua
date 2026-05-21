@@ -1,5 +1,8 @@
 local MainTopScreen = {}
 
+local DEFAULT_FONT = "dogicapixelbold"
+local DEFAULT_FONT_SIZE = 10
+
 local SHCanvas = require("sh_canvas")
 local SHCText = require("shc_text")
 local SHCImage = require("shc_image")
@@ -9,53 +12,25 @@ local InfoParser = require("info_parser")
 
 local canvasTop = SHCanvas:new(TOP_SCREEN)
 
-local userText = nil
-local birthdayText = nil
-local modelText = nil
-local regionText = nil
-local languageText = nil
-local languageValueText = nil
-
 local topBackground = SHCImage:new("romfs:/images/TopPlaceHolder.png")
 
+local function createText(x, y, z, content)
+    local text = SHCText:new({
+        transform = SHCTransform:new():setPosition(x, y, z),
+        fontName = DEFAULT_FONT,
+        size = DEFAULT_FONT_SIZE,
+        content = content
+    })
+    return text
+end
+
 function MainTopScreen.setup()
-    userText = SHCText:new({
-        transform = SHCTransform:new():setPosition(5, 47, 1),
-        fontName = "dogicapixelbold",
-        size = 10,
-        content = "User: " .. SystemInfo.infos.username
-    })
-    birthdayText = SHCText:new({
-        transform = SHCTransform:new():setPosition(5, 67, 1),
-        fontName = "dogicapixelbold",
-        size = 10,
-        content = "Birthday: " .. string.format("%02d", SystemInfo.infos.birthday.day) .. "/" .. string.format("%02d", SystemInfo.infos.birthday.month)
-    })
-    
-    modelText = SHCText:new({
-        transform = SHCTransform:new():setPosition(199, 47, 1),
-        fontName = "dogicapixelbold",
-        size = 10,
-        content = "Model: " .. InfoParser.parseModel(SystemInfo.infos.model)
-    })
-    regionText = SHCText:new({
-        transform = SHCTransform:new():setPosition(199, 67, 1),
-        fontName = "dogicapixelbold",
-        size = 10,
-        content = "Region: " .. InfoParser.parseRegion(SystemInfo.infos.region)
-    })
-    languageText = SHCText:new({
-        transform = SHCTransform:new():setPosition(199, 87, 1),
-        fontName = "dogicapixelbold",
-        size = 10,
-        content = "Language:"
-    })
-    languageValueText = SHCText:new({
-        transform = SHCTransform:new():setPosition(199, 107, 1),
-        fontName = "dogicapixelbold",
-        size = 10,
-        content = InfoParser.parseLanguage(SystemInfo.infos.language)
-    })
+    local userText = createText(5, 47, 1, "User: " .. SystemInfo.infos.username)
+    local birthdayText = createText(5, 67, 1, "Birthday: " .. string.format("%02d", SystemInfo.infos.birthday.day) .. "/" .. string.format("%02d", SystemInfo.infos.birthday.month))
+    local modelText = createText(199, 47, 1, "Model: " .. InfoParser.parseModel(SystemInfo.infos.model))
+    local regionText = createText(199, 67, 1, "Region: " .. InfoParser.parseRegion(SystemInfo.infos.region))
+    local languageText = createText(199, 87, 1, "Language:")
+    local languageValueText = createText(199, 107, 1, InfoParser.parseLanguage(SystemInfo.infos.language))
     
     canvasTop:addCanvasComponent(userText)
     canvasTop:addCanvasComponent(birthdayText)
