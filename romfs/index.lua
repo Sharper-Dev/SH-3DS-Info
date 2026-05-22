@@ -1,7 +1,7 @@
 package.path = package.path .. ";romfs:/scripts/core/?.lua"
 package.path = package.path .. ";romfs:/scripts/core/screens/?.lua"
-package.path = package.path .. ";romfs:/scripts/modules/SH Canvas/?.lua"
-package.path = package.path .. ";romfs:/scripts/modules/LPP Input System/?.lua"
+package.path = package.path .. ";romfs:/scripts/modules/sh_canvas/?.lua"
+package.path = package.path .. ";romfs:/scripts/modules/lpp_input_system/?.lua"
 
 local SHCanvas = require("sh_canvas")
 
