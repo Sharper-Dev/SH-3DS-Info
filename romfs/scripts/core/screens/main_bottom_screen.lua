@@ -10,7 +10,7 @@ local canvasBottom = SHCanvas:new(BOTTOM_SCREEN)
 local bottomBackground = SHCImage:new("romfs:/images/bottom_background.png")
 
 function MainBottomScreen.setup()
-    debugText = SHCText.createText(5, 5, 1, "")
+    debugText = SHCText.createQuickText(5, 5, 1, "", canvasBottom)
     canvasBottom:addCanvasComponent(bottomBackground)
     canvasBottom:addCanvasComponent(debugText)
 end

@@ -13,31 +13,19 @@ local dateText
 local timeText
 
 function MainTopScreen.setup()
-    dateText = SHCText.createText(140, 2, 1,"")
-    timeText = SHCText.createText(140, 22, 1, "")
-    
-    local userText = SHCText.createText(5, 47, 1, "User: " .. SystemInfo.getUsername())
-    local birthdayText = SHCText.createText(5, 67, 1, "Birthday: " .. SystemInfo.getBirthday())
-    local modelText = SHCText.createText(199, 47, 1, "Model: " .. SystemInfo.getModel())
-    local regionText = SHCText.createText(199, 67, 1, "Region: " .. SystemInfo.getRegion())
-    local languageText = SHCText.createText(199, 87, 1, "Language:")
-    local languageValueText = SHCText.createText(199, 107, 1, SystemInfo.getLanguage())
-    local firmwareText = SHCText.createText(199, 127, 1, "Firmware: " .. SystemInfo.getFirmware())
-    local kernelText = SHCText.createText(199, 147, 1, "Kernel: " .. SystemInfo.getKernel())
-    local cpuText = SHCText.createText(199, 167, 1, "CPU Speed: " .. SystemInfo.getCpuSpeed() .. "Mhz")
-    dateText:setContent("a")
-    canvasTop:addCanvasComponent(dateText)
-    canvasTop:addCanvasComponent(timeText)
-    canvasTop:addCanvasComponent(userText)
-    canvasTop:addCanvasComponent(birthdayText)
     canvasTop:addCanvasComponent(topBackground)
-    canvasTop:addCanvasComponent(modelText)
-    canvasTop:addCanvasComponent(regionText)
-    canvasTop:addCanvasComponent(languageText)
-    canvasTop:addCanvasComponent(languageValueText)
-    canvasTop:addCanvasComponent(firmwareText)
-    canvasTop:addCanvasComponent(kernelText)
-    canvasTop:addCanvasComponent(cpuText)
+    
+    dateText = SHCText.createQuickText(140, 2, 1, "", canvasTop)
+    timeText = SHCText.createQuickText(140, 22, 1, "", canvasTop)
+    
+    SHCText.createQuickText(5, 47, 1, "User: " .. SystemInfo.getUsername(), canvasTop)
+    SHCText.createQuickText(5, 67, 1, "Birthday: " .. SystemInfo.getBirthday(), canvasTop)
+    SHCText.createQuickText(199, 47, 1, "Model: " .. SystemInfo.getModel(), canvasTop)
+    SHCText.createQuickText(199, 67, 1, "Region: " .. SystemInfo.getRegion(), canvasTop)
+    SHCText.createQuickText(199, 87, 1, "Language:\n" .. SystemInfo.getLanguage(), canvasTop)
+    SHCText.createQuickText(199, 127, 1, "Firmware: " .. SystemInfo.getFirmware(), canvasTop)
+    SHCText.createQuickText(199, 147, 1, "Kernel: " .. SystemInfo.getKernel(), canvasTop)
+    SHCText.createQuickText(199, 167, 1, "CPU Speed: " .. SystemInfo.getCpuSpeed() .. "Mhz", canvasTop)
     
     SHCDebugger.startDebug(timeText)
 end
@@ -46,8 +34,8 @@ function MainTopScreen.update()
     dateText:setContent(SystemInfo.getDate().day .. "/" .. SystemInfo.getDate().month)
     dateText:setContent(dateText:getContent() .. " (" .. string.sub(SystemInfo.getDate().week, 1, 3) .. ")")
     timeText:setContent(SystemInfo.getTime().hours .. ":" .. SystemInfo.getTime().minutes)
-    SHCDebugger.update()
     
+    SHCDebugger.update() 
     canvasTop:draw()
 end
 

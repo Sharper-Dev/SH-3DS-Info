@@ -13,7 +13,8 @@ end
 
 function SHCDebugger.getDebugContent()
     local content = "Position: (" ..
-    currentComponent.transform.position.x .. ", " .. currentComponent.transform.position.y .. ")"
+    currentComponent.transform.position.x .. ", " .. currentComponent.transform.position.y .. ")" .. "\n"
+    .. "Size: " .. currentComponent:getSize()
     return content
 end
 

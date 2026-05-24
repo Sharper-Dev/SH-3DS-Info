@@ -7,7 +7,6 @@ SHCFonts.DEFAULT_FONT_SIZE = 10
 local FONTS_PATH = "romfs:/fonts/"
 local AVAILABLE_FONTS = { "dogicapixelbold", "arial" }
 
-
 function SHCFonts.setFontsPath(path)
     FONTS_PATH = path
 end
