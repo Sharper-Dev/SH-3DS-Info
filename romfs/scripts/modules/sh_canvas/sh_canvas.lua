@@ -1,6 +1,6 @@
 local SHCanvas = {}
 SHCanvas.__index = SHCanvas
-local FontsManager = require("fonts_manager")
+local SHCFonts = require("shc_fonts")
 
 function SHCanvas:new(space)
     local this = setmetatable({}, SHCanvas)
@@ -10,7 +10,7 @@ function SHCanvas:new(space)
 end
 
 function SHCanvas.init()
-    FontsManager.loadAllFonts()
+    SHCFonts.loadAllFonts()
 end
 
 function SHCanvas:draw()

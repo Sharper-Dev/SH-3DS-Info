@@ -20,19 +20,20 @@ setup()
 
 local function update()
     InputSystem.readInputs()
-    MainTopScreen.draw()
-    MainBottomScreen.draw()
+    MainTopScreen.update()
+    MainBottomScreen.update()
 end
 
 while true do
     Screen.refresh()
-    
     Screen.waitVblankStart()
     Screen.clear(TOP_SCREEN)
     Screen.clear(BOTTOM_SCREEN)
+
     update()
     
     Screen.flip()
+    
     if InputSystem.getKeyDown(KEY_HOME) then
         System.showHomeMenu()
     end

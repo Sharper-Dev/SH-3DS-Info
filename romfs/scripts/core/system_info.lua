@@ -1,23 +1,32 @@
 local SystemInfo = {}
 local InfoParser = require("info_parser")
 
-SystemInfo.infos = {
-    battery = {
-        isCharging = System.isBatteryCharging(),
-        life = nil
-    },
-    time = {
-        hours = 0,
-        minutes = 0,
-        seconds = 0
-    },
-    date = {
-        week = 0,
-        day = 0,
-        month = 0,
-        year = 0
-    }
-}
+function SystemInfo.getDate()
+    local week, day, month, year = System.getDate()
+
+    day = string.format("%02d", day)
+    month = string.format("%02d", month)
+    week = InfoParser.parseWeek(week)
+    return { week = week, day = day, month = month, year = year }
+end
+
+function SystemInfo.getTime()
+    local hours, minutes, seconds = System.getTime()
+    hours = string.format("%02d", hours)
+    minutes = string.format("%02d", minutes)
+    seconds = string.format("%02d", seconds)
+    
+    return { hours = hours, minutes = minutes, seconds = seconds }
+end
+
+function SystemInfo.getBattery()
+    local batteryTable = {}
+
+    batteryTable.isCharging = System.isBatteryCharging()
+    batteryTable.life = System.getBatteryLife()
+
+    return batteryTable
+end
 
 function SystemInfo.getUsername()
     return System.getUsername()
@@ -26,7 +35,7 @@ end
 function SystemInfo.getBirthday()
     local day, month = System.getBirthday()
 
-    return string.format("%02d", day) .. "/" .. string.format("%02d", month)
+    return string.format("%02d", month) .. "/" .. string.format("%02d", day)
 end
 
 function SystemInfo.getCpuSpeed()
@@ -49,31 +58,20 @@ end
 
 function SystemInfo.getRegion()
     local parsed = InfoParser.parseRegion(System.getRegion())
+
     return parsed
 end
 
 function SystemInfo.getModel()
     local parsed = InfoParser.parseModel(System.getModel())
+
     return parsed
 end
 
 function SystemInfo.getLanguage()
     local parsed = InfoParser.parseLanguage(System.getLanguage())
+
     return parsed
-end
-
-function SystemInfo.refreshInfos()
-    SystemInfo.infos.battery.isCharging = System.isBatteryCharging()
-    SystemInfo.infos.battery.life = System.getBatteryLife()
-
-    SystemInfo.infos.time.hours = (select(1, System.getTime()))
-    SystemInfo.infos.time.minutes = (select(2, System.getTime()))
-    SystemInfo.infos.time.seconds = (select(3, System.getTime()))
-
-    SystemInfo.infos.date.week = (select(1, System.getDate()))
-    SystemInfo.infos.date.day = (select(2, System.getDate()))
-    SystemInfo.infos.date.month = (select(3, System.getDate()))
-    SystemInfo.infos.date.year = (select(4, System.getDate()))
 end
 
 return SystemInfo
