@@ -15,17 +15,17 @@ local timeText
 function MainTopScreen.setup()
     canvasTop:addCanvasComponent(topBackground)
     
-    dateText = SHCText.createQuickText(140, 2, 1, "", canvasTop)
-    timeText = SHCText.createQuickText(140, 22, 1, "", canvasTop)
+    dateText = SHCText.createQuickText(canvasTop, "dpb1", 140, 2, 1, "")
+    timeText = SHCText.createQuickText(canvasTop, "dpb1", 172, 18, 1, "")
     
-    SHCText.createQuickText(5, 47, 1, "User: " .. SystemInfo.getUsername(), canvasTop)
-    SHCText.createQuickText(5, 67, 1, "Birthday: " .. SystemInfo.getBirthday(), canvasTop)
-    SHCText.createQuickText(199, 47, 1, "Model: " .. SystemInfo.getModel(), canvasTop)
-    SHCText.createQuickText(199, 67, 1, "Region: " .. SystemInfo.getRegion(), canvasTop)
-    SHCText.createQuickText(199, 87, 1, "Language:\n" .. SystemInfo.getLanguage(), canvasTop)
-    SHCText.createQuickText(199, 127, 1, "Firmware: " .. SystemInfo.getFirmware(), canvasTop)
-    SHCText.createQuickText(199, 147, 1, "Kernel: " .. SystemInfo.getKernel(), canvasTop)
-    SHCText.createQuickText(199, 167, 1, "CPU Speed: " .. SystemInfo.getCpuSpeed() .. "Mhz", canvasTop)
+    SHCText.createQuickText(canvasTop, "dpb1", 5, 47, 1, "User: " .. SystemInfo.getUsername())
+    SHCText.createQuickText(canvasTop, "dpb1", 5, 67, 1, "Birthday: " .. SystemInfo.getBirthday())
+    SHCText.createQuickText(canvasTop, "dpb1", 199, 47, 1, "Model: " .. SystemInfo.getModel())
+    SHCText.createQuickText(canvasTop, "dpb1", 199, 67, 1, "Region: " .. SystemInfo.getRegion())
+    SHCText.createQuickText(canvasTop, "dpb1", 199, 87, 1, "Language:\n" .. SystemInfo.getLanguage())
+    SHCText.createQuickText(canvasTop, "dpb1", 199, 127, 1, "Firmware: " .. SystemInfo.getFirmware())
+    SHCText.createQuickText(canvasTop, "dpb1", 199, 147, 1, "Kernel: " .. SystemInfo.getKernel())
+    SHCText.createQuickText(canvasTop, "dpb1", 199, 167, 1, "CPU Speed: " .. SystemInfo.getCpuSpeed() .. "Mhz")
     
     SHCDebugger.startDebug(timeText)
 end

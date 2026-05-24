@@ -9,23 +9,15 @@ function SHCTransform:new()
     return this
 end
 
-function SHCTransform:getPosition()
-    return self.position.x, self.position.y, self.position.z
-end
-
-function SHCTransform:getRotation()
-    return self.rotation.x, self.rotation.y, self.rotation.z
-end
-
-function SHCTransform:getScale()
-    return self.scale.x, self.scale.y, self.scale.z
-end
-
 function SHCTransform:setPosition(x, y, z)
     self.position.x = x or self.position.x
     self.position.y = y or self.position.y
     self.position.z = z or self.position.z
     return self
+end
+
+function SHCTransform:getPosition()
+    return { x = self.position.x, y = self.position.y, z = self.position.z }
 end
 
 function SHCTransform:setRotation(x, y, z)
@@ -35,11 +27,19 @@ function SHCTransform:setRotation(x, y, z)
     return self
 end
 
+function SHCTransform:getRotation()
+    return { x = self.rotation.x, y = self.rotation.y, z = self.rotation.z }
+end
+
 function SHCTransform:setScale(x, y, z)
     self.scale.x = x or self.scale.x
     self.scale.y = y or self.scale.y
     self.scale.z = z or self.scale.z
     return self
+end
+
+function SHCTransform:getScale()
+    return { x = self.scale.x, y = self.scale.y, z = self.scale.z }
 end
 
 return SHCTransform

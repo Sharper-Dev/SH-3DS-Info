@@ -3,15 +3,14 @@ package.path = package.path .. ";romfs:/scripts/core/screens/?.lua"
 package.path = package.path .. ";romfs:/scripts/modules/sh_canvas/?.lua"
 package.path = package.path .. ";romfs:/scripts/modules/lpp_input_system/?.lua"
 
-local SHCanvas = require("sh_canvas")
-
 local InputSystem = require("lpp_input_system")
+local SHCFonts = require("shc_fonts")
 local MainTopScreen = require("main_top_screen")
 local MainBottomScreen = require("main_bottom_screen")
 
 local function setup()
     Graphics.init()
-    SHCanvas.init()
+    SHCFonts.createFont("dogicapixelbold", "dpb1")
     MainTopScreen.setup()
     MainBottomScreen.setup()
 end

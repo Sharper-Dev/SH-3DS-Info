@@ -8,9 +8,9 @@ function SHCText:new(properties)
     local this = setmetatable({}, SHCText)
     
     this.transform = properties.transform or SHCTransform:new()
-    this:setFont(properties.fontName or "arial")
+    this:setFontID(properties.fontID or "arial")
     this:setContent(properties.content or "")
-    this:setSize(properties.size or 3)
+    this:setSize(this.transform:getScale().x)
     this:setColor(properties.color or Color.new(255, 255, 255))
     this:setLineBreak(properties.lineBreakDistance or 20)
     
@@ -26,18 +26,19 @@ function SHCText:getLineBreak()
 end
 
 function SHCText:setSize(pixelSize)
-    self.size = pixelSize
-    local font = SHCFonts.getFont(self.fontName)
-    Font.setPixelSizes(font, self.size)
+    self.transform:setScale(pixelSize)
+    local font = SHCFonts.getFont(self.fontID)
+    Font.setPixelSizes(font, self.transform:getScale().x)
 end
 
 function SHCText:getSize()
-    return self.size
+    return self.transform:getScale().x
 end
 
 function SHCText:setContent(content)
     self.content = content
     self.contentLines = {}
+    
     for line in content:gmatch("[^\r\n]+") do
         table.insert(self.contentLines, line)
     end
@@ -55,29 +56,28 @@ function SHCText:getColor()
     return self.color
 end
 
-function SHCText:setFont(fontName)
-    self.fontName = fontName
+function SHCText:setFontID(fontID)
+    self.fontID = fontID
 end
 
-function SHCText:getFontName()
-    return self.fontName
+function SHCText:getFontID()
+    return self.fontID
 end
 
-function SHCText.createQuickText(x, y, z, content, canvas)
+function SHCText.createQuickText(canvas, fontID, x, y, z, content)
     local text = SHCText:new({
-        transform = SHCTransform:new():setPosition(x, y, z),
-        fontName = SHCFonts.DEFAULT_FONT,
-        size = SHCFonts.DEFAULT_FONT_SIZE,
+        transform = SHCTransform:new():setPosition(x, y, z):setScale(10),
+        fontID = fontID,
         content = content
     })
-    canvas:addCanvasComponent(text)
     
+    canvas:addCanvasComponent(text)
     return text
 end
 
 function SHCText:_drawCPU(screen)
     for i, line in ipairs(self.contentLines) do
-        Font.print(SHCFonts.getFont(self.fontName), self.transform.position.x, self.transform.position.y + (i - 1) * self.lineBreakDistance, line,
+        Font.print(SHCFonts.getFont(self.fontID), self.transform.position.x, self.transform.position.y + (i - 1) * self.lineBreakDistance, line,
             self.color, screen)
     end
 end

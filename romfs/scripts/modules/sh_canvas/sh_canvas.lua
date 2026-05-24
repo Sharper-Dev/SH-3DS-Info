@@ -1,16 +1,11 @@
 local SHCanvas = {}
 SHCanvas.__index = SHCanvas
-local SHCFonts = require("shc_fonts")
 
 function SHCanvas:new(space)
     local this = setmetatable({}, SHCanvas)
     this.space = space or TOP_SCREEN
     this.components = {}
     return this
-end
-
-function SHCanvas.init()
-    SHCFonts.loadAllFonts()
 end
 
 function SHCanvas:draw()

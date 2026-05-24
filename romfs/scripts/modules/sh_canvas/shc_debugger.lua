@@ -12,9 +12,10 @@ function SHCDebugger.startDebug(component)
 end
 
 function SHCDebugger.getDebugContent()
-    local content = "Position: (" ..
-    currentComponent.transform.position.x .. ", " .. currentComponent.transform.position.y .. ")" .. "\n"
-    .. "Size: " .. currentComponent:getSize()
+    if not isDebugging then return "" end
+    local content = "DEBUGGING COMPONENT\nPosition: (" ..
+    currentComponent.transform.position.x .. ", " .. currentComponent.transform.position.y .. ", " .. currentComponent.transform.position.z ..")\n"
+    .. "Scale: (" .. currentComponent.transform:getScale().x .. ", " .. currentComponent.transform:getScale().y .. ", " .. currentComponent.transform:getScale().z .. ")"
     return content
 end
 
@@ -35,6 +36,12 @@ function SHCDebugger.update()
     if InputSystem.getKeyDown(KEY_DRIGHT) then
         currentComponent.transform:setPosition(currentComponent.transform.position.x + 1,
             currentComponent.transform.position.y)
+    end
+    if InputSystem.getKeyDown(KEY_B) then
+        currentComponent:setSize(currentComponent:getSize() - 1)
+    end
+    if InputSystem.getKeyDown(KEY_A) then
+        currentComponent:setSize(currentComponent:getSize() + 1)
     end
 end
 
