@@ -1,9 +1,9 @@
 local InfoParser = {}
 local MODELS = {
-    [0] = "Nintendo 3DS",
-    [1] = "Nintendo 3DS XL",
+    [0] = "Old 3DS",
+    [1] = "3DS XL",
     [2] = "New 3DS",
-    [3] = "Nintendo 2DS",
+    [3] = "2DS",
     [4] = "New 3DS XL",
     [5] = "New 2DS XL"
 }
@@ -19,11 +19,11 @@ local LANGUAGES = {
     [3] = "Deutsch",
     [4] = "Italian",
     [5] = "Spanish",
-    [6] = "Simplified Chinese",
+    [6] = "Sim. Chinese",
     [7] = "Korean",
     [8] = "Russian",
     [9] = "Portuguese",
-    [10] = "Traditional Chinese",
+    [10] = "Tra. Chinese",
 }
 local WEEKS = {
     [1] = "Monday",

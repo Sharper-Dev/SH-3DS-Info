@@ -5,6 +5,7 @@ local SHCText = require("shc_text")
 local SHCImage = require("shc_image")
 local SHCDebugger = require("shc_debugger")
 local SystemInfo = require("system_info")
+local BatteryHud = require("battery_hud")
 
 local canvasTop = SHCanvas:new(TOP_SCREEN)
 local topBackground = SHCImage:new("romfs:/images/TopPlaceHolder.png")
@@ -26,15 +27,14 @@ function MainTopScreen.setup()
     SHCText.createQuickText(canvasTop, "dpb1", 199, 127, 1, "Firmware: " .. SystemInfo.getFirmware())
     SHCText.createQuickText(canvasTop, "dpb1", 199, 147, 1, "Kernel: " .. SystemInfo.getKernel())
     SHCText.createQuickText(canvasTop, "dpb1", 199, 167, 1, "CPU Speed: " .. SystemInfo.getCpuSpeed() .. "Mhz")
-    
-    SHCDebugger.startDebug(timeText)
+    BatteryHud.create(canvasTop)
 end
 
 function MainTopScreen.update()
     dateText:setContent(SystemInfo.getDate().day .. "/" .. SystemInfo.getDate().month)
     dateText:setContent(dateText:getContent() .. " (" .. string.sub(SystemInfo.getDate().week, 1, 3) .. ")")
     timeText:setContent(SystemInfo.getTime().hours .. ":" .. SystemInfo.getTime().minutes)
-    
+    BatteryHud.setLevel(SystemInfo.getBattery().life)
     SHCDebugger.update() 
     canvasTop:draw()
 end

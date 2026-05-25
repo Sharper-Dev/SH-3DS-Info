@@ -6,6 +6,7 @@ function SHCImage:new(imagePath)
     local this = setmetatable({}, SHCImage)
     this.transform = SHCTransform:new()
     this.imagePath = imagePath or ""
+    this.isVisible = true
     if this.imagePath ~= "" then
         this.image = Graphics.loadImage(this.imagePath)
     else
@@ -15,7 +16,8 @@ function SHCImage:new(imagePath)
     return this
 end
 
-function SHCImage:_drawGPU(space)
+function SHCImage:_drawGPU()
+    if not self.isVisible then return end
     Graphics.drawImage(self.transform.position.x, self.transform.position.y, self.image)
 end
 
