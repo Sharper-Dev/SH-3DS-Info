@@ -16,6 +16,8 @@ function SHCanvas:draw()
         end
     end
     Graphics.termBlend()
+    
+    --TODO: Remove CPU Rendering and use GPU Rendering instead to render texts
     for _, component in ipairs(self.components) do
         if (type(component._drawCPU) == "function") then
             component:_drawCPU(self.space)

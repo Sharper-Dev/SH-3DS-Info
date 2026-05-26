@@ -1,13 +1,23 @@
 local SystemInfo = {}
 local InfoParser = require("info_parser")
 
+local dateTable  = {}
+local timeTable  = {}
+local networkTable = {}
+
 function SystemInfo.getDate()
     local week, day, month, year = System.getDate()
 
     day = string.format("%02d", day)
     month = string.format("%02d", month)
     week = InfoParser.parseWeek(week)
-    return { week = week, day = day, month = month, year = year }
+    
+    dateTable.week = week
+    dateTable.day = day
+    dateTable.month = month
+    dateTable.year = year
+    
+    return dateTable
 end
 
 function SystemInfo.getTime()
@@ -16,7 +26,11 @@ function SystemInfo.getTime()
     minutes = string.format("%02d", minutes)
     seconds = string.format("%02d", seconds)
     
-    return { hours = hours, minutes = minutes, seconds = seconds }
+    timeTable.hours = hours
+    timeTable.minutes = minutes
+    timeTable.seconds = seconds
+    
+    return timeTable
 end
 
 function SystemInfo.getBattery()
@@ -74,4 +88,11 @@ function SystemInfo.getLanguage()
     return parsed
 end
 
+function SystemInfo.getNetwork()
+    networkTable.isWifiEnabled = Network.isWifiEnabled()
+    networkTable.wifiLevel = Network.getWifiLevel()
+    networkTable.mac = networkTable.mac or Network.getMacAddress()
+    
+    return networkTable
+end
 return SystemInfo
