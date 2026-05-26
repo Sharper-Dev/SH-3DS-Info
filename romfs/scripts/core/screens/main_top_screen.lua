@@ -11,10 +11,12 @@ local canvasTop = SHCanvas:new(TOP_SCREEN)
 local dateText
 local timeText
 local networkText
+local freeSpaceText
 
 function MainTopScreen.setup()
     SHCBuilder.createImage(canvasTop, "romfs:/images/TopPlaceHolder.png", 0, 0, 0)
-
+    BatteryHud.create(canvasTop)
+    
     dateText = SHCBuilder.createText(canvasTop, "dpb1", 140, 2, 1, "")
     timeText = SHCBuilder.createText(canvasTop, "dpb1", 172, 18, 1, "")
     networkText = SHCBuilder.createText(canvasTop, "dpb1", 5, 107, 1, "")
@@ -32,14 +34,14 @@ function MainTopScreen.setup()
         "CPU Speed: " .. SystemInfo.getCpuSpeed() .. "Mhz"
     
     SHCBuilder.createText(canvasTop, "dpb1", 199, 47, 1, columnContent2)
-    
-    BatteryHud.create(canvasTop)
+
+    freeSpaceText = SHCBuilder.createText(canvasTop, "dpb1", 1, 226, 1, "")
 end
 
 function MainTopScreen.update()
     dateText:setContent(SystemInfo.getDate().day .. "/" .. SystemInfo.getDate().month .. " (" .. string.sub(SystemInfo.getDate().week, 1, 3) .. ")")
     timeText:setContent(SystemInfo.getTime().hours .. ":" .. SystemInfo.getTime().minutes)
-    
+    freeSpaceText:setContent("SDMC: " .. SystemInfo.getFreeSpace() .. "MB Free")
     networkText:setContent("Wifi: " .. tostring(SystemInfo.getNetwork().isWifiEnabled) .. "\n" ..
         "Level: " .. SystemInfo.getNetwork().wifiLevel .. "\n" ..
         "MAC:\n" .. SystemInfo.getNetwork().mac)

@@ -92,7 +92,11 @@ function SystemInfo.getNetwork()
     networkTable.isWifiEnabled = Network.isWifiEnabled()
     networkTable.wifiLevel = Network.getWifiLevel()
     networkTable.mac = networkTable.mac or Network.getMacAddress()
-    
+
     return networkTable
+end
+
+function SystemInfo.getFreeSpace()
+	return System.getFreeSpace()
 end
 return SystemInfo
