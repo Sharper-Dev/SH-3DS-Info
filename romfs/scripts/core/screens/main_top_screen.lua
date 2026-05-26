@@ -1,30 +1,28 @@
 local MainTopScreen = {}
 
 local SHCanvas = require("sh_canvas")
-local SHCText = require("shc_text")
-local SHCImage = require("shc_image")
+local SHCBuilder = require("shc_builder")
 local SHCDebugger = require("shc_debugger")
 local SystemInfo = require("system_info")
 local BatteryHud = require("battery_hud")
 
 local canvasTop = SHCanvas:new(TOP_SCREEN)
-local topBackground = SHCImage:new("romfs:/images/TopPlaceHolder.png")
 
 local dateText
 local timeText
 local networkText
 
 function MainTopScreen.setup()
-    canvasTop:addCanvasComponent(topBackground)
-    
-    dateText = SHCText.createQuickText(canvasTop, "dpb1", 140, 2, 1, "")
-    timeText = SHCText.createQuickText(canvasTop, "dpb1", 172, 18, 1, "")
-    networkText = SHCText.createQuickText(canvasTop, "dpb1", 5, 107, 1, "")
+    SHCBuilder.createImage(canvasTop, "romfs:/images/TopPlaceHolder.png", 0, 0, 0)
+
+    dateText = SHCBuilder.createText(canvasTop, "dpb1", 140, 2, 1, "")
+    timeText = SHCBuilder.createText(canvasTop, "dpb1", 172, 18, 1, "")
+    networkText = SHCBuilder.createText(canvasTop, "dpb1", 5, 107, 1, "")
     
     local columnContent1 = "User: " .. SystemInfo.getUsername() .. "\n" ..
         "Birthday: " .. SystemInfo.getBirthday()
     
-    SHCText.createQuickText(canvasTop, "dpb1", 5, 47, 1, columnContent1)
+    SHCBuilder.createText(canvasTop, "dpb1", 5, 47, 1, columnContent1)
     
     local columnContent2 = "Model: " .. SystemInfo.getModel() .. "\n" ..
         "Region: " .. SystemInfo.getRegion() .. "\n" ..
@@ -33,7 +31,7 @@ function MainTopScreen.setup()
         "Kernel: " .. SystemInfo.getKernel() .. "\n" ..
         "CPU Speed: " .. SystemInfo.getCpuSpeed() .. "Mhz"
     
-    SHCText.createQuickText(canvasTop, "dpb1", 199, 47, 1, columnContent2)
+    SHCBuilder.createText(canvasTop, "dpb1", 199, 47, 1, columnContent2)
     
     BatteryHud.create(canvasTop)
 end

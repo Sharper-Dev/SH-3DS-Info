@@ -1,5 +1,6 @@
 local BatteryHud = {}
-local SHCImage = require("shc_image")
+local SHCBuilder = require("shc_builder")
+
 local SHCDebugger = require("shc_debugger")
 
 local batteryEmpty
@@ -7,26 +8,14 @@ local cable
 local batteryFills = {}
 
 function BatteryHud.create(canvas)
-    batteryEmpty = SHCImage:new("romfs:/images/battery_empty.png")
-    batteryEmpty.transform:setPosition(373, 1, 1)
+    batteryEmpty = SHCBuilder.createImage(canvas, "romfs:/images/battery_empty.png", 373, 1, 1)
     
-    cable = SHCImage:new("romfs:/images/cable.png")
+    cable = SHCBuilder.createImage(canvas, "romfs:/images/cable.png", 364, 3, 1)
     cable.isVisible = false
-    cable.transform:setPosition(364, 3, 1)
-    
-    canvas:addCanvasComponent(batteryEmpty)
-    canvas:addCanvasComponent(cable)
     
     for i = 1, 4 do
-        batteryFills[i] = SHCImage:new("romfs:/images/battery_fill.png")
-        batteryFills[i].transform.position.z = 2
-        batteryFills[i].transform.localPosition = {
-            x = batteryEmpty.transform.position.x + (i * 5),
-            y = batteryEmpty.transform.position.y + 2
-        }
-        batteryFills[i].transform:setPosition(batteryFills[i].transform.localPosition.x,
-            batteryFills[i].transform.localPosition.y)
-        canvas:addCanvasComponent(batteryFills[i])
+        batteryFills[i] = SHCBuilder.createImage(canvas, "romfs:/images/battery_fill.png", batteryEmpty.transform.position.x + (i * 5),
+            batteryEmpty.transform.position.y + 2, 2)
     end
     SHCDebugger.startDebug(cable)
 end

@@ -2,11 +2,11 @@ local SHCImage = {}
 SHCImage.__index = SHCImage
 local SHCTransform = require("shc_transform")
 
-function SHCImage:new(imagePath)
+function SHCImage:new(properties)
     local this = setmetatable({}, SHCImage)
-    this.transform = SHCTransform:new()
-    this.imagePath = imagePath or ""
-    this.isVisible = true
+    this.transform = properties.transform or SHCTransform:new()
+    this.imagePath = properties.imagePath or ""
+    this.isVisible = properties.isVisible or true
     if this.imagePath ~= "" then
         this.image = Graphics.loadImage(this.imagePath)
     else

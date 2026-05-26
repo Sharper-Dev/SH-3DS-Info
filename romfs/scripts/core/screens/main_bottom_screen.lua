@@ -1,18 +1,15 @@
 local MainBottomScreen = {}
 
 local SHCanvas = require("sh_canvas")
-local SHCImage = require("shc_image")
+local SHCBuilder = require("shc_builder")
 local SHCDebugger = require("shc_debugger")
-local SHCText = require("shc_text")
 
 local debugText
 local canvasBottom = SHCanvas:new(BOTTOM_SCREEN)
-local bottomBackground = SHCImage:new("romfs:/images/bottom_background.png")
 
 function MainBottomScreen.setup()
-    debugText = SHCText.createQuickText(canvasBottom, "dpb1", 5, 5, 1, "")
-    canvasBottom:addCanvasComponent(bottomBackground)
-    canvasBottom:addCanvasComponent(debugText)
+    SHCBuilder.createImage(canvasBottom, "romfs:/images/bottom_background.png", 0, 0, 0)
+    debugText = SHCBuilder.createText(canvasBottom, "dpb1", 5, 5, 1, "")
 end
 
 function MainBottomScreen.update()
