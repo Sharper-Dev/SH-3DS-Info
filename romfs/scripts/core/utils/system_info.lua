@@ -1,5 +1,5 @@
 local SystemInfo = {}
-local InfoParser = require("info_parser")
+local InfoParser = require("core.utils.info_parser")
 
 local dateTable  = {}
 local timeTable  = {}

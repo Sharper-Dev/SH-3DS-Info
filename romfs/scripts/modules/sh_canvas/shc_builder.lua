@@ -1,8 +1,8 @@
 local SHCBuilder = {}
 
-local SHCText = require("shc_text")
-local SHCTransform = require("shc_transform")
-local SHCImage = require("shc_image")
+local SHCText = require("sh_canvas.shc_text")
+local SHCTransform = require("sh_canvas.shc_transform")
+local SHCImage = require("sh_canvas.shc_image")
 
 function SHCBuilder.createText(canvas, fontID, x, y, z, content)
     local text = SHCText:new({

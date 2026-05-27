@@ -1,6 +1,6 @@
 local SHCImage = {}
 SHCImage.__index = SHCImage
-local SHCTransform = require("shc_transform")
+local SHCTransform = require("sh_canvas.shc_transform")
 
 function SHCImage:new(properties)
     local this = setmetatable({}, SHCImage)

@@ -1,8 +1,8 @@
 local SHCText = {}
 SHCText.__index = SHCText
 
-local SHCFonts = require("shc_fonts")
-local SHCTransform = require("shc_transform")
+local SHCFonts = require("sh_canvas.shc_fonts")
+local SHCTransform = require("sh_canvas.shc_transform")
 
 function SHCText:new(properties)
     local this = setmetatable({}, SHCText)

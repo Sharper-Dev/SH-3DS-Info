@@ -1,10 +1,10 @@
 local MainTopScreen = {}
 
 local SHCanvas = require("sh_canvas")
-local SHCBuilder = require("shc_builder")
-local SHCDebugger = require("shc_debugger")
-local SystemInfo = require("system_info")
-local BatteryHud = require("battery_hud")
+local SHCBuilder = require("sh_canvas.shc_builder")
+local SHCDebugger = require("sh_canvas.shc_debugger")
+local SystemInfo = require("core.utils.system_info")
+local BatteryHud = require("core.hud.battery_hud")
 
 local canvasTop = SHCanvas:new(TOP_SCREEN)
 
@@ -49,7 +49,7 @@ function MainTopScreen.update()
     BatteryHud.setLevel(SystemInfo.getBattery().life - 1)
     BatteryHud.updateChargeState(SystemInfo.getBattery().isCharging)
     
-    SHCDebugger.update()
+    --SHCDebugger.update()
     
     canvasTop:draw()
 end

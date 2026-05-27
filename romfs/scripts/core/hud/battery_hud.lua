@@ -1,7 +1,5 @@
 local BatteryHud = {}
-local SHCBuilder = require("shc_builder")
-
-local SHCDebugger = require("shc_debugger")
+local SHCBuilder = require("sh_canvas.shc_builder")
 
 local batteryEmpty
 local cable
@@ -17,7 +15,6 @@ function BatteryHud.create(canvas)
         batteryFills[i] = SHCBuilder.createImage(canvas, "romfs:/images/battery_fill.png", batteryEmpty.transform.position.x + (i * 5),
             batteryEmpty.transform.position.y + 2, 2)
     end
-    SHCDebugger.startDebug(cable)
 end
 
 function BatteryHud.setLevel(level)

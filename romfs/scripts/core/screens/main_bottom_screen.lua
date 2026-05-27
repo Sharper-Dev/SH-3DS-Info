@@ -1,8 +1,8 @@
 local MainBottomScreen = {}
 
 local SHCanvas = require("sh_canvas")
-local SHCBuilder = require("shc_builder")
-local SHCDebugger = require("shc_debugger")
+local SHCBuilder = require("sh_canvas.shc_builder")
+local SHCDebugger = require("sh_canvas.shc_debugger")
 
 local debugText
 local canvasBottom = SHCanvas:new(BOTTOM_SCREEN)
