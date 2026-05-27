@@ -39,10 +39,10 @@ function MainTopScreen.setup()
 end
 
 function MainTopScreen.update()
-    dateText:setContent(SystemInfo.getDate().day .. "/" .. SystemInfo.getDate().month .. " (" .. string.sub(SystemInfo.getDate().week, 1, 3) .. ")")
+    dateText:setContent(SystemInfo.getDate().month .. "/" .. SystemInfo.getDate().day .. " (" .. string.sub(SystemInfo.getDate().week, 1, 3) .. ")")
     timeText:setContent(SystemInfo.getTime().hours .. ":" .. SystemInfo.getTime().minutes)
     freeSpaceText:setContent("SDMC: " .. string.format("%.2f", SystemInfo.getFreeSpace()) .. "GB Free")
-    networkText:setContent("Wifi: " .. tostring(SystemInfo.getNetwork().isWifiEnabled) .. "\n" ..
+    networkText:setContent("Wifi: " .. SystemInfo.getNetwork().isWifiEnabled .. "\n" ..
         "Level: " .. SystemInfo.getNetwork().wifiLevel .. "\n" ..
         "MAC:\n" .. SystemInfo.getNetwork().mac)
     

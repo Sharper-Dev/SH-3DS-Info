@@ -89,7 +89,7 @@ function SystemInfo.getLanguage()
 end
 
 function SystemInfo.getNetwork()
-    networkTable.isWifiEnabled = Network.isWifiEnabled()
+    networkTable.isWifiEnabled = Network.isWifiEnabled() and "ON" or "OFF"
     networkTable.wifiLevel = Network.getWifiLevel()
     networkTable.mac = networkTable.mac or Network.getMacAddress()
 
