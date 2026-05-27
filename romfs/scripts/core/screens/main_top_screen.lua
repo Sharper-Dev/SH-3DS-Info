@@ -14,7 +14,7 @@ local networkText
 local freeSpaceText
 
 function MainTopScreen.setup()
-    SHCBuilder.createImage(canvasTop, "romfs:/images/TopPlaceHolder.png", 0, 0, 0)
+    SHCBuilder.createImage(canvasTop, "romfs:/images/top_background.png", 0, 0, 0)
     BatteryHud.create(canvasTop)
     
     dateText = SHCBuilder.createText(canvasTop, "dpb1", 140, 2, 1, "")
@@ -41,7 +41,7 @@ end
 function MainTopScreen.update()
     dateText:setContent(SystemInfo.getDate().day .. "/" .. SystemInfo.getDate().month .. " (" .. string.sub(SystemInfo.getDate().week, 1, 3) .. ")")
     timeText:setContent(SystemInfo.getTime().hours .. ":" .. SystemInfo.getTime().minutes)
-    freeSpaceText:setContent("SDMC: " .. SystemInfo.getFreeSpace() .. "MB Free")
+    freeSpaceText:setContent("SDMC: " .. string.format("%.2f", SystemInfo.getFreeSpace()) .. "GB Free")
     networkText:setContent("Wifi: " .. tostring(SystemInfo.getNetwork().isWifiEnabled) .. "\n" ..
         "Level: " .. SystemInfo.getNetwork().wifiLevel .. "\n" ..
         "MAC:\n" .. SystemInfo.getNetwork().mac)

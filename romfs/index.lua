@@ -23,9 +23,10 @@ local function update()
     MainBottomScreen.update()
 end
 
-while true do
+while System.checkStatus() == APP_RUNNING do
     Screen.refresh()
     Screen.waitVblankStart()
+    
     Screen.clear(TOP_SCREEN)
     Screen.clear(BOTTOM_SCREEN)
 
@@ -34,10 +35,7 @@ while true do
     Screen.flip()
     
     if InputSystem.getKeyDown(KEY_HOME) then
-        System.showHomeMenu()
-    end
-    if System.checkStatus() == APP_EXITING then
+        Graphics.term()
         System.exit()
-        break
     end
 end

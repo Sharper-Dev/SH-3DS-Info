@@ -97,6 +97,6 @@ function SystemInfo.getNetwork()
 end
 
 function SystemInfo.getFreeSpace()
-	return System.getFreeSpace()
+	return System.getFreeSpace() / (1024 * 1024 * 1024)
 end
 return SystemInfo
