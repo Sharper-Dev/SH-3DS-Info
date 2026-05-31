@@ -1,23 +1,12 @@
 local SHCFonts = {}
 local loadedFonts = {}
-local json = require("dkjson")
 local FONTS_PATH = "romfs:/fonts/"
 local font = {}
 
 function SHCFonts.loadFont(fontName)
     font.sheet = Graphics.loadImage(FONTS_PATH .. fontName .. "/" .. fontName .. ".png")
-
-    local stream = io.open(FONTS_PATH .. fontName .. "/" .. fontName .. ".json", FREAD)
-    local content = io.read(stream, 0, io.size(stream))
-
-    font.data = json.decode(content)
-    io.close(stream)
     
-    local chars = {}
-    for _, char in ipairs(font.data.chars) do
-        chars[char.id] = char
-    end
-    font.data.chars = chars
+    font.data = dofile(FONTS_PATH .. fontName .. "/" .. fontName .. ".lua")
 end
 
 function SHCFonts.getBMFont()

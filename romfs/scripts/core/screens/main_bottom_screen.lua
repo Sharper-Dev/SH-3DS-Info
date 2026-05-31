@@ -14,7 +14,7 @@ end
 function MainBottomScreen.update()
     --debugText:setContent(SHCDebugger.getDebugContent())
     canvasBottom:draw()
-    local text = "teA"
+    local text = "abc"
     Graphics.initBlend(BOTTOM_SCREEN)
     local position = { x = 150, y = 100 }
     local cursor = { x = position.x, y = position.y }
