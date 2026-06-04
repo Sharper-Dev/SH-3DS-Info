@@ -18,6 +18,7 @@ end
 
 function SHCImage:_drawGPU()
     if not self.isVisible then return end
+
     Graphics.drawImage(self.transform.position.x, self.transform.position.y, self.image)
 end
 

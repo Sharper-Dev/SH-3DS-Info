@@ -5,6 +5,7 @@ local InputSystem = require("lpp_input_system")
 local currentComponent
 
 local isDebugging = false
+local value = 0.1
 
 function SHCDebugger.startDebug(component)
     currentComponent = component
@@ -13,9 +14,9 @@ end
 
 function SHCDebugger.getDebugContent()
     if not isDebugging then return "" end
-    local content = "DEBUGGING COMPONENT\nPosition: (" ..
+    local content = "(" ..
     currentComponent.transform.position.x .. ", " .. currentComponent.transform.position.y .. ", " .. currentComponent.transform.position.z ..")\n"
-    .. "Scale: (" .. currentComponent.transform:getScale().x .. ", " .. currentComponent.transform:getScale().y .. ", " .. currentComponent.transform:getScale().z .. ")"
+    .. " (" .. currentComponent.transform.scale.x .. ", " .. currentComponent.transform.scale.y .. ")"
     return content
 end
 
@@ -38,10 +39,12 @@ function SHCDebugger.update()
             currentComponent.transform.position.y)
     end
     if InputSystem.getKeyDown(KEY_B) then
-        currentComponent:setSize(currentComponent:getSize() - 1)
+        currentComponent.transform:setScale(currentComponent.transform.scale.x - value,
+            currentComponent.transform.scale.y - value)
     end
     if InputSystem.getKeyDown(KEY_A) then
-        currentComponent:setSize(currentComponent:getSize() + 1)
+        currentComponent.transform:setScale(currentComponent.transform.scale.x + value,
+            currentComponent.transform.scale.y + value)
     end
 end
 
