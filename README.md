@@ -1,2 +1,2 @@
 # SH 3DS Info
-Simple 3DS homebrew that shows the system info
+Simple Nintendo 3DS homebrew that shows the system info.
