@@ -9,7 +9,7 @@ local debugText
 
 function MainBottomScreen.setup()
     SHCBuilder.createImage(canvasBottom, "romfs:/images/bottom_background.png", 0, 0, 0)
-    debugText = SHCBuilder.createText(canvasBottom, "dpb1", 10, 10, 1, "")
+    debugText = SHCBuilder.createText(canvasBottom, "dpb1", 1, 10, 10, 1, "")
 end
 
 function MainBottomScreen.update()

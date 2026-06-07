@@ -4,12 +4,14 @@ local SHCText = require("sh_canvas.shc_text")
 local SHCTransform = require("sh_canvas.shc_transform")
 local SHCImage = require("sh_canvas.shc_image")
 
-function SHCBuilder.createText(canvas, fontID, x, y, z, content)
+function SHCBuilder.createText(canvas, fontName, size, x, y, z, content)
     local text = SHCText:new({
         transform = SHCTransform:new():setPosition(x, y, z),
-        fontID = fontID,
+        fontName = fontName,
         content = content
     })
+    text.transform:setScale(size, size)
+    text.canvas = canvas
     canvas:addCanvasComponent(text)
     return text
 end

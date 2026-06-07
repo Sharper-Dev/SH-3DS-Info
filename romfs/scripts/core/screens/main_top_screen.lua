@@ -14,40 +14,40 @@ local networkText
 local freeSpaceText
 
 function MainTopScreen.setup()
-    SHCBuilder.createImage(canvasTop, "romfs:/images/TopPlaceHolder.png", 0, 0, 0)
+    SHCBuilder.createImage(canvasTop, "romfs:/images/top_background.png", 0, 0, 0)
     BatteryHud.create(canvasTop)
     
-    dateText = SHCBuilder.createText(canvasTop, "dpb1", 152, 9, 1, "")
-    timeText = SHCBuilder.createText(canvasTop, "dpb1", 173, 23, 1, "")
-   
-    -- networkText = SHCBuilder.createText(canvasTop, "dpb1", 5, 107, 1, "")
+    local textScale = 0.8
+    local font = "dogicapixelbold"
+    dateText = SHCBuilder.createText(canvasTop, font, textScale, 140, 9, 1, "")
+    timeText = SHCBuilder.createText(canvasTop, font, textScale, 172, 25, 1, "")
+    networkText = SHCBuilder.createText(canvasTop, font, textScale, 10, 113, 1, "")
     
-    -- local columnContent1 = "User: " .. SystemInfo.getUsername() .. "\n" ..
-    --     "Birthday: " .. SystemInfo.getBirthday()
+     local columnContent1 = "User: " .. SystemInfo.getUsername() .. "\n" ..
+         "Birthday: " .. SystemInfo.getBirthday()
     
-    -- SHCBuilder.createText(canvasTop, "dpb1", 5, 47, 1, columnContent1)
+    SHCBuilder.createText(canvasTop, font, textScale, 10, 53, 1, columnContent1)
     
-    -- local columnContent2 = "Model: " .. SystemInfo.getModel() .. "\n" ..
-    --     "Region: " .. SystemInfo.getRegion() .. "\n" ..
-    --     "Language:\n" .. SystemInfo.getLanguage() .. "\n" ..
-    --     "Firmware: " .. SystemInfo.getFirmware() .. "\n" ..
-    --     "Kernel: " .. SystemInfo.getKernel() .. "\n" ..
-    --     "CPU Speed: " .. SystemInfo.getCpuSpeed() .. "Mhz"
+    local columnContent2 = "Model: " .. SystemInfo.getModel() .. "\n" ..
+        "Region: " .. SystemInfo.getRegion() .. "\n" ..
+        "Language:\n" .. SystemInfo.getLanguage() .. "\n" ..
+        "Firmware: " .. SystemInfo.getFirmware() .. "\n" ..
+        "Kernel: " .. SystemInfo.getKernel() .. "\n" ..
+        "CPU Speed: " .. SystemInfo.getCpuSpeed() .. "Mhz"
     
-    -- SHCBuilder.createText(canvasTop, "dpb1", 199, 47, 1, columnContent2)
-
-    -- freeSpaceText = SHCBuilder.createText(canvasTop, "dpb1", 1, 226, 1, "")
-    SHCDebugger.startDebug(timeText)
+    SHCBuilder.createText(canvasTop, font, textScale, 204, 53, 1, columnContent2)
+    
+    freeSpaceText = SHCBuilder.createText(canvasTop, font, textScale, 7, 233, 1, "")
 end
 
 function MainTopScreen.update()
-    
     dateText:setContent(SystemInfo.getDate().month .. "/" .. SystemInfo.getDate().day .. " (" .. string.sub(SystemInfo.getDate().week, 1, 3) .. ")")
     timeText:setContent(SystemInfo.getTime().hours .. ":" .. SystemInfo.getTime().minutes)
-    -- freeSpaceText:setContent("SDMC: " .. string.format("%.2f", SystemInfo.getFreeSpace()) .. "GB Free")
-    -- networkText:setContent("Wifi: " .. SystemInfo.getNetwork().isWifiEnabled .. "\n" ..
-    --     "Level: " .. SystemInfo.getNetwork().wifiLevel .. "\n" ..
-    --     "MAC:\n" .. SystemInfo.getNetwork().mac)
+    freeSpaceText:setContent("SDMC: " .. string.format("%.2f", SystemInfo.getFreeSpace()) .. "GB Free")
+    
+    networkText:setContent("Wifi: " .. SystemInfo.getNetwork().isWifiEnabled .. "\n" ..
+        "Level: " .. SystemInfo.getNetwork().wifiLevel .. "\n" ..
+        "MAC:\n" .. SystemInfo.getNetwork().mac)
     
     BatteryHud.setLevel(SystemInfo.getBattery().life - 1)
     BatteryHud.updateChargeState(SystemInfo.getBattery().isCharging)

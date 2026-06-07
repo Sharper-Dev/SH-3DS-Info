@@ -9,24 +9,11 @@ function SHCText:new(properties)
     local this = setmetatable({}, SHCText)
     
     this.transform = properties.transform or SHCTransform:new()
-    this:setFontID(properties.fontID or "arial")
+    this.fontName = properties.fontName or "arial"
     this:setContent(properties.content or "")
-    this:setColor(properties.color or Color.new(255, 255, 255))
-    this:setLineBreak(properties.lineBreakDistance or 20)
+    this.color = properties.color or Color.new(255, 255, 255)
+    this.lineBreakDistance = properties.lineBreakDistance or 20
     return this
-end
-
-function SHCText:setLineBreak(distance)
-    self.lineBreakDistance = distance
-end
-
-function SHCText:getLineBreak()
-    return self.lineBreakDistance
-end
-
-
-function SHCText:getSize()
-    return self.transform:getScale().x
 end
 
 function SHCText:setContent(content)
@@ -42,33 +29,21 @@ function SHCText:getContent()
     return self.content
 end
 
-function SHCText:setColor(color)
-    self.color = color
-end
-
-function SHCText:getColor()
-    return self.color
-end
-
-function SHCText:setFontID(fontID)
-    self.fontID = fontID
-end
-
-function SHCText:getFontID()
-    return self.fontID
-end
-
 function SHCText:_drawGPU()
     local cursor = { x = self.transform.position.x, y = self.transform.position.y }
-
-    for i, code in utf8.codes(self.content) do
-        local charInfo = SHCFonts.getFont("dogicapixelbold").data.chars[code]
-        if charInfo then
-             Graphics.drawImageExtended(cursor.x + charInfo.xoffset, cursor.y + charInfo.yoffset * self.transform.scale.y, charInfo.x, charInfo.y, charInfo.width, charInfo.height,
-                 self.transform.rotation, self.transform.scale.x, self.transform.scale.y,
-                 SHCFonts.getFont("dogicapixelbold").sheet)
-            cursor.x = cursor.x + charInfo.xadvance * self.transform.scale.x
+    local font = SHCFonts.getFont(self.fontName)
+    
+    for _, lineContent in ipairs(self.contentLines) do
+        for _, code in utf8.codes(lineContent) do
+            local charInfo = font.data.chars[code]
+            if charInfo then
+                 Graphics.drawImageExtended(cursor.x + charInfo.xoffset, cursor.y + charInfo.yoffset * self.transform.scale.y, charInfo.x, charInfo.y, charInfo.width, charInfo.height,
+                     self.transform.rotation, self.transform.scale.x, self.transform.scale.y, font.sheet)
+                cursor.x = cursor.x + charInfo.xadvance * self.transform.scale.x
+            end
         end
+        cursor.y = cursor.y + self.lineBreakDistance
+        cursor.x = self.transform.position.x
     end
 end
 

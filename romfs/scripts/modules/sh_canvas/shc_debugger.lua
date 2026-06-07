@@ -1,7 +1,6 @@
 local SHCDebugger = {}
 
 local InputSystem = require("lpp_input_system")
-
 local currentComponent
 
 local isDebugging = false
@@ -16,7 +15,7 @@ function SHCDebugger.getDebugContent()
     if not isDebugging then return "" end
     local content = "(" ..
     currentComponent.transform.position.x .. ", " .. currentComponent.transform.position.y .. ", " .. currentComponent.transform.position.z ..")\n"
-    .. " (" .. currentComponent.transform.scale.x .. ", " .. currentComponent.transform.scale.y .. ")"
+    .. "(" .. currentComponent.transform.scale.x .. ", " .. currentComponent.transform.scale.y .. ")"
     return content
 end
 
@@ -46,6 +45,7 @@ function SHCDebugger.update()
         currentComponent.transform:setScale(currentComponent.transform.scale.x + value,
             currentComponent.transform.scale.y + value)
     end
+
 end
 
 return SHCDebugger
