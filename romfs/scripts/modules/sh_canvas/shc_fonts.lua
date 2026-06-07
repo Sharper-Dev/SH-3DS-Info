@@ -1,20 +1,16 @@
 local SHCFonts = {}
 local loadedFonts = {}
-
 local FONTS_PATH = "romfs:/fonts/"
 
-function SHCFonts.createFont(fontName, fontID)
-    local font = Font.load(FONTS_PATH .. fontName .. ".ttf")
-    loadedFonts[fontID] = font
+function SHCFonts.loadFont(fontName)
+    local fontTable = {}
+    fontTable.sheet = Graphics.loadImage(FONTS_PATH .. fontName .. "/" .. fontName .. ".png")
+    fontTable.data = dofile(FONTS_PATH .. fontName .. "/" .. fontName .. ".lua")
+    loadedFonts[fontName] = fontTable
 end
 
-function SHCFonts.destroyFont(fontID)
-    Font.unload(loadedFonts[fontID])
-    loadedFonts[fontID] = nil
-end
-
-function SHCFonts.getFont(fontID)
-    return loadedFonts[fontID]
+function SHCFonts.getFont(fontName)
+    return loadedFonts[fontName]
 end
 
 return SHCFonts
