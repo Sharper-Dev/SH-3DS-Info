@@ -21,12 +21,12 @@ function MainTopScreen.setup()
     local font = "dogicapixelbold"
     dateText = SHCBuilder.createText(canvasTop, font, textScale, 140, 9, 1, "")
     timeText = SHCBuilder.createText(canvasTop, font, textScale, 172, 25, 1, "")
-    networkText = SHCBuilder.createText(canvasTop, font, textScale, 10, 113, 1, "")
+    networkText = SHCBuilder.createText(canvasTop, font, textScale, 7, 113, 1, "")
     
      local columnContent1 = "User: " .. SystemInfo.getUsername() .. "\n" ..
          "Birthday: " .. SystemInfo.getBirthday()
     
-    SHCBuilder.createText(canvasTop, font, textScale, 10, 53, 1, columnContent1)
+    SHCBuilder.createText(canvasTop, font, textScale, 7, 53, 1, columnContent1)
     
     local columnContent2 = "Model: " .. SystemInfo.getModel() .. "\n" ..
         "Region: " .. SystemInfo.getRegion() .. "\n" ..
