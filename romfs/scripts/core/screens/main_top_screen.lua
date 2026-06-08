@@ -52,8 +52,6 @@ function MainTopScreen.update()
     BatteryHud.setLevel(SystemInfo.getBattery().life - 1)
     BatteryHud.updateChargeState(SystemInfo.getBattery().isCharging)
     
-    SHCDebugger.update()
-    
     canvasTop:draw()
 end
 

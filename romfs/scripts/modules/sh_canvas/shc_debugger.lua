@@ -4,7 +4,7 @@ local InputSystem = require("lpp_input_system")
 local currentComponent
 
 local isDebugging = false
-local value = 0.1
+local value = 0.05
 
 function SHCDebugger.startDebug(component)
     currentComponent = component
