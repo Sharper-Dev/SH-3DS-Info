@@ -18,7 +18,7 @@ function MainTopScreen.setup()
     BatteryHud.create(canvasTop)
     
     local textScale = 0.8
-    local font = "dogicapixelbmf"
+    local font = "dogica_16px"
     dateText = SHCBuilder.createText(canvasTop, font, textScale, 140, 9, 1, "")
     timeText = SHCBuilder.createText(canvasTop, font, textScale, 172, 25, 1, "")
     networkText = SHCBuilder.createText(canvasTop, font, textScale, 7, 113, 1, "")

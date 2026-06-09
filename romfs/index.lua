@@ -7,7 +7,8 @@ local MainBottomScreen = require("core.screens.main_bottom_screen")
 
 local function setup()
     Graphics.init()
-    SHCFonts.loadFont("dogicapixelbmf")
+    SHCFonts.loadFont("dogica_16px")
+    SHCFonts.loadFont("dogica_8px")
     MainTopScreen.setup()
     MainBottomScreen.setup()
 end

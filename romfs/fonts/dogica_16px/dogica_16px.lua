@@ -2091,7 +2091,7 @@ chars={
 },
 info={
 	size=16,
-	face="Dogica Pixel Bold BMF",
+	face="Dogica Pixel Bold 16px",
 	stretchH=100,
 	unicode=1,
 	outline=0,

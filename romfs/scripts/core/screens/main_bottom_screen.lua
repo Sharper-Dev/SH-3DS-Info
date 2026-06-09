@@ -9,12 +9,12 @@ local debugText
 
 function MainBottomScreen.setup()
     SHCBuilder.createImage(canvasBottom, "romfs:/images/bottom_background.png", 0, 0, 0)
-    debugText = SHCBuilder.createText(canvasBottom, "dogicapixelbmf", 1, 87, 113, 1, "")
+    debugText = SHCBuilder.createText(canvasBottom, "dogica_16px", 1, 87, 113, 1, "")
 
-    SHCBuilder.createText(canvasBottom, "dogicapixelbmf", 0.8, 79, 9, 1, "Test your input!")
-    SHCBuilder.createText(canvasBottom, "dogicapixelbmf", 0.45, 105, 227, 1, "Made by Sharper Dev")
-    SHCBuilder.createText(canvasBottom, "dogicapixelbmf", 0.45, 59, 236, 1, "Lua Player Plus by Rinnegatamante")
-    
+    SHCBuilder.createText(canvasBottom, "dogica_16px", 0.8, 79, 9, 1, "Test your input!")
+    SHCBuilder.createText(canvasBottom, "dogica_8px", 1, 105, 227, 1, "Made by Sharper Dev")
+    local dt = SHCBuilder.createText(canvasBottom, "dogica_8px", 1, 54, 236, 1, "Lua Player Plus by Rinnegatamante")
+    SHCDebugger.startDebug(dt)
 end
 
 function MainBottomScreen.update()
