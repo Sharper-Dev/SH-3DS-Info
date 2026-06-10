@@ -37,7 +37,7 @@ function SHCText:_drawGPU()
         for _, code in utf8.codes(lineContent) do
             local charInfo = font.data.chars[code]
             if charInfo then
-                 Graphics.drawImageExtended(cursor.x + charInfo.xoffset, cursor.y + charInfo.yoffset * self.transform.scale.y, charInfo.x, charInfo.y, charInfo.width, charInfo.height,
+                 Graphics.drawImageExtended(cursor.x + charInfo.xoffset, math.floor(cursor.y) + charInfo.yoffset * self.transform.scale.y, charInfo.x, charInfo.y, charInfo.width, charInfo.height,
                      self.transform.rotation, self.transform.scale.x, self.transform.scale.y, font.sheet)
                 cursor.x = cursor.x + charInfo.xadvance * self.transform.scale.x
             end

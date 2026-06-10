@@ -15,7 +15,7 @@ local freeSpaceText
 
 function MainTopScreen.setup()
     SHCBuilder.createImage(canvasTop, "romfs:/images/top_background.png", 0, 0, 0)
-    BatteryHud.create(canvasTop)
+    BatteryHud.create(canvasTop) 
     
     local textScale = 0.8
     local font = "dogica_16px"

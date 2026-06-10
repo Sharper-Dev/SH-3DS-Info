@@ -45,4 +45,9 @@ function InputSystem.getKeyUp(key)
     return Controls.check(upButtons, key)
 end
 
+function InputSystem.getTouch()
+	local x, y = Controls.readTouch()
+	return {x = x, y = y}
+end
+
 return InputSystem

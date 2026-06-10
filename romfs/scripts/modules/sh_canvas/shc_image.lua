@@ -7,11 +7,11 @@ function SHCImage:new(properties)
     this.transform = properties.transform or SHCTransform:new()
     this.imagePath = properties.imagePath or ""
     this.isVisible = properties.isVisible or true
-    if this.imagePath ~= "" then
+    
+    if this.imagePath ~= "" or this.image == nil then
         this.image = Graphics.loadImage(this.imagePath)
     else
-        local newImage = Screen.createImage(100, 100, Color.new(255, 255, 255))
-        this.image = Graphics.convertFrom(newImage)
+        this.image = Graphics.convertFrom(this.image)
     end
     return this
 end
