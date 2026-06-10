@@ -22,6 +22,10 @@ function InputSystem.readInputs()
     upButtons = updated & previousInput
 end
 
+function InputSystem.getRawInput()
+    return currentInput
+end
+
 function InputSystem.getCirclePad()
     local x, y = Controls.readCirclePad()
     x = (math.abs(x) > circlePadDeadZone) and x or 0
