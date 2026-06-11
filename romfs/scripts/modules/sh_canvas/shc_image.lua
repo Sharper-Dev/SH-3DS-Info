@@ -14,7 +14,7 @@ function SHCImage:setImage(img)
         self.image = Graphics.loadImage(img)
     else
         self.image = img
-    end
+    end 
     return self
 end
 

@@ -33,6 +33,13 @@ function InputSystem.getCirclePad()
     return x, y
 end
 
+function InputSystem.getCstick()
+    local x, y = Controls.readCstickPad()
+    x = (math.abs(x) > circlePadDeadZone) and x or 0
+    y = (math.abs(y) > circlePadDeadZone) and y or 0
+    return x, y
+end
+
 function InputSystem.setCirclePadDeadZone(deadZoneValue)
     circlePadDeadZone = deadZoneValue
 end
