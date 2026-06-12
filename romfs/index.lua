@@ -21,7 +21,7 @@ local function update()
     MainBottomScreen.update()
 end
 
-while System.checkStatus() == APP_RUNNING do
+while true do
     Screen.refresh()
     Screen.waitVblankStart()
     
@@ -32,7 +32,7 @@ while System.checkStatus() == APP_RUNNING do
     
     Screen.flip()
     
-    if InputSystem.getKeyDown(KEY_HOME) then
+    if InputSystem.getKeyDown(KEY_HOME) or InputSystem.getKeyDown(KEY_POWER) then
         Graphics.term()
         System.exit()
     end
